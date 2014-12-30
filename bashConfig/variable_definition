@@ -12,6 +12,8 @@ case $1 in
     'icmbpriv20')
 	export PATH=${PATH}:~/Store/bin:/opt/bin
 	;;
+    'pit3-linux')
+	export PATH=~/Store/bin:/opt/bin:${PATH}
     'aries')
 	;;
     *)
