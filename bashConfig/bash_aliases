@@ -74,70 +74,101 @@ fi
 # Functionalized Aliases #
 #------------------------#
 
-
+function checkCommand()
+{
+    CHECK=$1
+    COMMAND=$2
+    MSG=$3
+    if which $CHECK &> /dev/null; then
+	$COMMAND ${3:#}
+    else
+	echo "$MSG"
+    fi
+}
+  
 function e()
 {
-    if [[ "$#" -ne "0" ]]; then
-	emacs -g 80x36+10+35 "$@" &
+    if which emacs &> /dev/null; then
+	if [[ "$#" -ne "0" ]]; then
+	    emacs -g 80x36+10+35 "$@" &
+	else
+	    emacs -g 80x36+10+35 . &
+	fi
     else
-	emacs -g 80x36+10+35 . &
+	echo "Emacs not found"
     fi
 }
 
-function ediff() {
+function ediff()
+{
+    if which emacs &> /dev/null; then
         if [ "X${2}" = "X" ]; then
-                echo "USAGE: ediff <FILE 1> <FILE 2>"
+            echo "USAGE: ediff <FILE 1> <FILE 2>"
         else
-                # The --eval flag takes lisp code and evaluates it with EMACS
-                emacs -nw --eval "(ediff-files \"$1\" \"$2\")"
+            # The --eval flag takes lisp code and evaluates it with EMACS
+            emacs -nw --eval "(ediff-files \"$1\" \"$2\")"
         fi
+    else
+	echo "Emacs not found"
+    fi
 }
 
 function enw()
 {
-    if [[ "$#" -ne "0" ]]; then
-	emacs -nw "$@"
+    if which emacs &> /dev/null; then
+	if [[ "$#" -ne "0" ]]; then
+	    emacs -nw "$@"
+	else
+	    emacs -nw .
+	fi
     else
-	emacs -nw .
+	echo "Emacs not found"
     fi
 }
 
 
 function syncdir()
 {
-    removing=''
-    if [[ $# -eq 0 ]]; then
-	echo "Usage: syncdir SOURCE_DIRECTORY DEST_DIRECTORY"
-	echo "Sincronize the content of two directory"
-	echo "Specifying 'removing' as last argument you will use the "removing" keyword "
-    else
-	
-	if [[ $3 == "removing" ]]; then
-            removing="--delete"
+    if which rsync &> /dev/null; then
+	removing=''
+	if [[ $# -eq 0 ]]; then
+	    echo "Usage: syncdir SOURCE_DIRECTORY DEST_DIRECTORY"
+	    echo "Sincronize the content of two directory"
+	    echo "Specifying 'removing' as last argument you will use the "removing" keyword "
+	else
+	    
+	    if [[ $3 == "removing" ]]; then
+		removing="--delete"
+	    fi
+	    
+	    rsync $removing -uhavzP $1 $2
 	fi
-	
-	rsync $removing -uhavzP $1 $2
+    else
+	echo "RSYNC not found!"
     fi
+
 }
 
 
-#function d()
-#{
-#    if [[ "$#" -ne "0" ]]; then
-#	dolphin "$@" &
-#    else
-#	dolphin .  &
-#    fi    
-#}
+function d()
+{
+    if which dolphin &> /dev/null; then
+	if [[ "$#" -ne "0" ]]; then
+	    dolphin "$@" &
+	else
+	    dolphin .  &
+	fi    
+    else
+	echo "Emacs not found"
+    fi
+}
 
 
 #------------#
 # SSH alias  #
 #------------#
 
- alias SSHtun='ssh -C tunnel@petraglia.hopto.org'
- alias SSHlx8='ssh -CX petraglia@lx08.sm.chim.unifi.it'
- alias SSHuni='ssh -CX petraglia@stufis06.fisica.unifi.it'
  alias ssh='ssh -CX'
- alias SSHpit='ssh -CX riccardo@128.178.134.133'
+
+
 
