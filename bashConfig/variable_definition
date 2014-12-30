@@ -14,6 +14,7 @@ case $1 in
 	;;
     'pit3-linux')
 	export PATH=~/Store/bin:/opt/bin:${PATH}
+	;;
     'aries')
 	;;
     *)

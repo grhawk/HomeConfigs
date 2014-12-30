@@ -11,9 +11,6 @@
   alias h='history'
   alias path='echo -e ${PATH//:\\n}'
   alias top='htop'
-  alias sshuni='ssh -C -X petraglia@stufis15.fisica.unifi.it'
-#  alias unix2dos='unix2dos -vp'
-#  alias dos2unix='dos2unix -vp'
   alias r='fc -e -'  # for reverse search
 
 #-------------------#
@@ -34,7 +31,7 @@ if [ -x /usr/bin/dircolors ]; then
   alias ll='ls -hFl --color=auto'   #Sort with information
   alias lx='ls -hFB --color=auto'   #Sort by extention
   alias lk='ls -lSrhF --color=auto' #Sort by size
-  alias la='ls -al'                 #Sort with hidden files
+  alias la='ls -alh'                 #Sort with hidden files
   alias lt='ls -hFltr --color=auto' #Sort by date
   alias lm='ls -hF --color=auto | less' #Pipe trought 'more'
   alias tree='tree -Cs'                 #Nice alternative to recursive ls
@@ -68,101 +65,6 @@ fi
   
   alias rmf='rm -f'
   alias rmc='rm *~'
-
-
-#------------------------#
-# Functionalized Aliases #
-#------------------------#
-
-function checkCommand()
-{
-    CHECK=$1
-    COMMAND=$2
-    MSG=$3
-    if which $CHECK &> /dev/null; then
-	$COMMAND ${3:#}
-    else
-	echo "$MSG"
-    fi
-}
-  
-function e()
-{
-    if which emacs &> /dev/null; then
-	if [[ "$#" -ne "0" ]]; then
-	    emacs -g 80x36+10+35 "$@" &
-	else
-	    emacs -g 80x36+10+35 . &
-	fi
-    else
-	echo "Emacs not found"
-    fi
-}
-
-function ediff()
-{
-    if which emacs &> /dev/null; then
-        if [ "X${2}" = "X" ]; then
-            echo "USAGE: ediff <FILE 1> <FILE 2>"
-        else
-            # The --eval flag takes lisp code and evaluates it with EMACS
-            emacs -nw --eval "(ediff-files \"$1\" \"$2\")"
-        fi
-    else
-	echo "Emacs not found"
-    fi
-}
-
-function enw()
-{
-    if which emacs &> /dev/null; then
-	if [[ "$#" -ne "0" ]]; then
-	    emacs -nw "$@"
-	else
-	    emacs -nw .
-	fi
-    else
-	echo "Emacs not found"
-    fi
-}
-
-
-function syncdir()
-{
-    if which rsync &> /dev/null; then
-	removing=''
-	if [[ $# -eq 0 ]]; then
-	    echo "Usage: syncdir SOURCE_DIRECTORY DEST_DIRECTORY"
-	    echo "Sincronize the content of two directory"
-	    echo "Specifying 'removing' as last argument you will use the "removing" keyword "
-	else
-	    
-	    if [[ $3 == "removing" ]]; then
-		removing="--delete"
-	    fi
-	    
-	    rsync $removing -uhavzP $1 $2
-	fi
-    else
-	echo "RSYNC not found!"
-    fi
-
-}
-
-
-function d()
-{
-    if which dolphin &> /dev/null; then
-	if [[ "$#" -ne "0" ]]; then
-	    dolphin "$@" &
-	else
-	    dolphin .  &
-	fi    
-    else
-	echo "Emacs not found"
-    fi
-}
-
 
 #------------#
 # SSH alias  #

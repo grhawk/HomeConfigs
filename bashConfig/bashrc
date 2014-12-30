@@ -224,11 +224,12 @@ case $compname in
     'icmbpriv20')
 	if [ $DEBUG ]; then echo 'Loading icmbpriv20'; fi
 	;;
-    'pit3-linux')
-	if [ $DEBUG ]; then echo 'Loading pit3-linux'; fi
-	;;
     *)
 	echo 'Computer Name not found in bashrc!!'
 	echo 'Load default environment'
 	;;
 esac
+
+## Load definition from file
+HOSTFILECONF="$bashConfig/HOSTS.SETTINGS/${compname}.settings"
+[[ -f $HOSTFILECONF ]] && source $HOSTFILECONF
