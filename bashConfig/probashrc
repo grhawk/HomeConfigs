@@ -1,0 +1,1 @@
+[[ -r "$HOME/.bashConfig/profile" ]] && source "$HOME/.bashConfig/profile"

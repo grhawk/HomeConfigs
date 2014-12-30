@@ -1,0 +1,143 @@
+#------------------#
+# Personal Aliases #
+#------------------#
+
+  alias ..='cd ..'
+  alias j='jobs -l'
+  alias c='clear'
+  alias df='df -h'
+  alias du='du -h'
+  alias su='su -'
+  alias h='history'
+  alias path='echo -e ${PATH//:\\n}'
+  alias top='htop'
+  alias sshuni='ssh -C -X petraglia@stufis15.fisica.unifi.it'
+#  alias unix2dos='unix2dos -vp'
+#  alias dos2unix='dos2unix -vp'
+  alias r='fc -e -'  # for reverse search
+
+#-------------------#
+# 'ls' family alias #
+#-------------------#
+
+# enable color support of ls 
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+
+#if [ "$TERM" != "dumb" ]; then
+#    [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
+#    [ -e "$DIR_COLORS" ] || DIR_COLORS=""
+#    eval "`dircolors -b $DIR_COLORS`"
+
+
+  alias ls='ls -hF --color=auto'
+  alias ll='ls -hFl --color=auto'   #Sort with information
+  alias lx='ls -hFB --color=auto'   #Sort by extention
+  alias lk='ls -lSrhF --color=auto' #Sort by size
+  alias la='ls -al'                 #Sort with hidden files
+  alias lt='ls -hFltr --color=auto' #Sort by date
+  alias lm='ls -hF --color=auto | less' #Pipe trought 'more'
+  alias tree='tree -Cs'                 #Nice alternative to recursive ls
+  alias ld='ls -hFld --color=auto'  #Sort with information only of directory
+  alias l1='ls -hF --color=auto -1'
+fi
+  
+#--------------#
+# Sudo Aliases #
+#--------------#
+
+#  alias fdisk='sudo /sbin/fdisk -l'
+#  alias reboot='sudo /sbin/reboot'
+#  alias shutdown='sudo /sbin/shutdown -h now'
+#  alias hddtemp='sudo /usr/sbin/hddtemp'
+#  alias hibernate='sudo /usr/sbin/hibernate'
+  
+#  alias mount='sudo /bin/mount'
+#  alias umount='sudo /bin/umount'
+#  alias wlanup='sudo /sbin/ifconfig wlan0 up'
+#  alias wlandown='sudo /sbin/ifconfig wlan0 down'
+#  alias wlassistant='sudo /usr/sbin/wlassistant'
+
+#---------------------#
+# Files (s)Protection #
+#---------------------#
+
+  alias rm='rm -iv' 
+  alias mv='mv -iv'
+  alias cp='cp -i'
+  
+  alias rmf='rm -f'
+  alias rmc='rm *~'
+
+
+#------------------------#
+# Functionalized Aliases #
+#------------------------#
+
+
+function e()
+{
+    if [[ "$#" -ne "0" ]]; then
+	emacs -g 80x36+10+35 "$@" &
+    else
+	emacs -g 80x36+10+35 . &
+    fi
+}
+
+function ediff() {
+        if [ "X${2}" = "X" ]; then
+                echo "USAGE: ediff <FILE 1> <FILE 2>"
+        else
+                # The --eval flag takes lisp code and evaluates it with EMACS
+                emacs -nw --eval "(ediff-files \"$1\" \"$2\")"
+        fi
+}
+
+function enw()
+{
+    if [[ "$#" -ne "0" ]]; then
+	emacs -nw "$@"
+    else
+	emacs -nw .
+    fi
+}
+
+
+function syncdir()
+{
+    removing=''
+    if [[ $# -eq 0 ]]; then
+	echo "Usage: syncdir SOURCE_DIRECTORY DEST_DIRECTORY"
+	echo "Sincronize the content of two directory"
+	echo "Specifying 'removing' as last argument you will use the "removing" keyword "
+    else
+	
+	if [[ $3 == "removing" ]]; then
+            removing="--delete"
+	fi
+	
+	rsync $removing -uhavzP $1 $2
+    fi
+}
+
+
+#function d()
+#{
+#    if [[ "$#" -ne "0" ]]; then
+#	dolphin "$@" &
+#    else
+#	dolphin .  &
+#    fi    
+#}
+
+
+#------------#
+# SSH alias  #
+#------------#
+
+ alias SSHtun='ssh -C tunnel@petraglia.hopto.org'
+ alias SSHlx8='ssh -CX petraglia@lx08.sm.chim.unifi.it'
+ alias SSHuni='ssh -CX petraglia@stufis06.fisica.unifi.it'
+ alias ssh='ssh -CX'
+ alias SSHpit='ssh -CX riccardo@128.178.134.133'
+
