@@ -26,20 +26,20 @@ fi
 #   Links to other files    #
 #---------------------------#
 
-if [ -f $bashConfig/bash_aliases ]; then
-    source $bashConfig/bash_aliases $compname
+if [ -f $bashConfig/bash_aliases.rc ]; then
+    source $bashConfig/bash_aliases.rc $compname
 fi
 
-if [ -f $bashConfig/colors_definition ]; then
-    source $bashConfig/colors_definition $compname
+if [ -f $bashConfig/colors_definition.rc ]; then
+    source $bashConfig/colors_definition.rc $compname
 fi
 
-if [ -f $bashConfig/variable_definition ]; then
-    source $bashConfig/variable_definition $compname
+if [ -f $bashConfig/variable_definition.rc ]; then
+    source $bashConfig/variable_definition.rc $compname
 fi
 
-if [ -f $bashConfig/bash_psrc ]; then
-    source $bashConfig/bash_psrc $compname
+if [ -f $bashConfig/bash_ps.rc ]; then
+    source $bashConfig/bash_ps.rc $compname
 fi
 
 
