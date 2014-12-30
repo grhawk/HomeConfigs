@@ -1,1 +1,5 @@
+#!/bin/bash
+## This file should substitute the $HOME/.bashrc file so that the settings
+## in bashConfig are loaded
+
 [[ -r "$HOME/.bashConfig/profile" ]] && source "$HOME/.bashConfig/profile"
