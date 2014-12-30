@@ -7,6 +7,12 @@ An easy way to track and sync my configuration across multiple computers
 TODO
 ====
 
+GeneralConfiguration
+--------------------
+
++ Move everithing which is computer depending in a file with the same name as the
+  computer that is automatically called from bashrc
+
 install.py
 ----------
 
@@ -17,3 +23,5 @@ install.py
 
 ### TO DECIDE:
 Should I create a script for each single "config package" or only one big script?
+
+
