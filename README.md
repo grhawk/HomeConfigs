@@ -25,3 +25,9 @@ install.py
 Should I create a script for each single "config package" or only one big script?
 
 
+BASH Settings
+-------------
+
++ Create directory instead of file in the HOST.SETTINGS directory. Each directory
+should have the same name as the file now and should contain a series of files
+that are executed when the host is invoked.
