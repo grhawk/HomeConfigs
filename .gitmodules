@@ -1,6 +1,3 @@
-[submodule ".emacs.d"]
-	path = emacs.d
-	url = git@github.com:grhawk/.emacs.d.git
-[submodule "emacs.d"]
-	path = emacs.d
-	url = git@github.com:grhawk/.emacs.d.git
+[submodule "emacs.d/site-lisp/dash.el"]
+	path = emacs.d/site-lisp/dash
+	url = git@github.com:magnars/dash.el.git
